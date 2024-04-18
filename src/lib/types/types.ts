@@ -55,5 +55,7 @@ export type Source = {
     name: string;
     link: string;
     summary: string;
+    title: string;
+    engine: string;
 };
 

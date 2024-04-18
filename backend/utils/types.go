@@ -50,12 +50,15 @@ const (
 	StepHandleToolError               StepType = "HandleToolError"
 	StepHandleToolStart               StepType = "HandleToolStart"
 	StepHandleVectorFound             StepType = "HandleVectorFound"
+	StepHandleFormat                  StepType = "HandleFormat"
 )
 
 type Source struct {
 	Name    string `json:"name"`
 	Link    string `json:"link"`
 	Summary string `json:"summary"`
+	Engine  string `json:"engine"`
+	Title   string `json:"title"`
 }
 
 type SeaXngResult struct {

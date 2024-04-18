@@ -32,7 +32,7 @@ func streamHandler(w http.ResponseWriter, r *http.Request) {
 	// create the go channel which is used to push
 	// logs from deeper inside the backend to
 	// the http stream
-	outputChan := make(chan utils.HttpJsonStreamElement)
+	outputChan := make(chan utils.HttpJsonStreamElement, 100)
 	defer close(outputChan)
 
 	// start the actual agentchain
@@ -45,6 +45,11 @@ func streamHandler(w http.ResponseWriter, r *http.Request) {
 			if !ok {
 				return
 			}
+
+			// if output.StepType == utils.StepHandleVectorFound {
+			// 	slog.Info("Vector found", "vector", output.Message)
+			// }
+
 			jsonString, err := json.Marshal(output)
 			if err != nil {
 				slog.Info("Error marshalling output", "error", err)
@@ -133,6 +138,7 @@ func parseClientSettings(r *http.Request) (utils.ClientSettings, error) {
 		slog.Error("error parsing request body json", "error", err)
 		return utils.ClientSettings{}, err
 	}
+
 	slog.Info("Client settings", "settings", clientSettings)
 	return clientSettings, nil
 }

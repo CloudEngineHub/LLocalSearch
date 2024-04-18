@@ -3,6 +3,7 @@ services:
   backend:
     volumes:
       - ./backend/:/app/
+      - /home/nils/Notes/:/localfiles/:ro
     build:
       context: ./backend
       dockerfile: Dockerfile.dev
